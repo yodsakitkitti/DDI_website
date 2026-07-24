@@ -1,13 +1,22 @@
 import type { MouseEvent } from 'react';
-import type { Project } from '../content/siteContent';
+import type { DashboardCardContent, Project } from '../content/siteContent';
 
 interface ProjectCardProps {
+  content: DashboardCardContent;
+  exampleProjectLabel: string;
   project: Project;
   onView: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export function ProjectCard({ project, onView }: ProjectCardProps) {
+export function ProjectCard({
+  content,
+  exampleProjectLabel,
+  project,
+  onView,
+}: ProjectCardProps) {
   const statusClass = project.status.toLowerCase().replace(/ /g, '-');
+  const memberLabel =
+    project.members.length === 1 ? content.memberSingular : content.memberPlural;
 
   return (
     <article className="project-card">
@@ -18,7 +27,7 @@ export function ProjectCard({ project, onView }: ProjectCardProps) {
 
       <div className="project-card__heading">
         <div>
-          <span className="project-card__example">Example project</span>
+          <span className="project-card__example">{exampleProjectLabel}</span>
           <h3>{project.name}</h3>
         </div>
         <span className="project-card__category">{project.category}</span>
@@ -28,13 +37,13 @@ export function ProjectCard({ project, onView }: ProjectCardProps) {
 
       <div className="project-progress">
         <div className="project-progress__label">
-          <span>Progress</span>
+          <span>{content.progressLabel}</span>
           <strong>{project.progress}%</strong>
         </div>
         <div
           className="project-progress__track"
           role="progressbar"
-          aria-label={`${project.name} progress`}
+          aria-label={`${project.name} ${content.progressLabel.toLowerCase()}`}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={project.progress}
@@ -45,16 +54,18 @@ export function ProjectCard({ project, onView }: ProjectCardProps) {
 
       <dl className="project-card__facts">
         <div>
-          <dt>Team</dt>
-          <dd>{project.members.length} members</dd>
+          <dt>{content.teamLabel}</dt>
+          <dd>
+            {project.members.length} {memberLabel}
+          </dd>
         </div>
         <div>
-          <dt>Due date</dt>
+          <dt>{content.dueDateLabel}</dt>
           <dd>{project.dueDate}</dd>
         </div>
       </dl>
 
-      <div className="technology-list" aria-label="Technologies">
+      <div className="technology-list" aria-label={content.technologiesLabel}>
         {project.technologies.map((technology) => (
           <span key={technology}>{technology}</span>
         ))}
@@ -63,10 +74,10 @@ export function ProjectCard({ project, onView }: ProjectCardProps) {
       <button
         className="project-card__action"
         type="button"
-        aria-label={`View demo for ${project.name}`}
+        aria-label={`${content.viewDemoLabel} for ${project.name}`}
         onClick={onView}
       >
-        View Demo
+        {content.viewDemoLabel}
       </button>
     </article>
   );

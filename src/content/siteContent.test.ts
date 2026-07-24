@@ -33,3 +33,11 @@ test('filters projects by case-insensitive project search', () => {
   expect(filterProjects(projects, 'campus', 'All', 'All Categories')).toEqual(projects);
   expect(filterProjects(projects, 'missing', 'All', 'All Categories')).toEqual([]);
 });
+
+test.each([
+  ['Ava Chen', 'member'],
+  ['indoor navigation', 'description'],
+  ['iot', 'category'],
+])('filters projects by case-insensitive %s search', (query) => {
+  expect(filterProjects(projects, query, 'All', 'All Categories')).toEqual(projects);
+});

@@ -1,13 +1,21 @@
 import { useEffect, useRef, type KeyboardEvent } from 'react';
-import type { Project } from '../content/siteContent';
+import type { DashboardDetailContent, Project } from '../content/siteContent';
 
 interface ProjectDetailProps {
+  content: DashboardDetailContent;
+  exampleProjectLabel: string;
   project: Project;
   returnFocusTo: HTMLElement | null;
   onClose: () => void;
 }
 
-export function ProjectDetail({ project, returnFocusTo, onClose }: ProjectDetailProps) {
+export function ProjectDetail({
+  content,
+  exampleProjectLabel,
+  project,
+  returnFocusTo,
+  onClose,
+}: ProjectDetailProps) {
   const dialogRef = useRef<HTMLElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -75,14 +83,14 @@ export function ProjectDetail({ project, returnFocusTo, onClose }: ProjectDetail
       >
         <div className="project-detail__header">
           <div>
-            <span className="project-detail__example">Example project</span>
+            <span className="project-detail__example">{exampleProjectLabel}</span>
             <h2>{project.name}</h2>
           </div>
           <button
             ref={closeButtonRef}
             className="project-detail__close"
             type="button"
-            aria-label="Close project details"
+            aria-label={content.closeLabel}
             onClick={onClose}
           >
             ×
@@ -94,29 +102,29 @@ export function ProjectDetail({ project, returnFocusTo, onClose }: ProjectDetail
 
         <dl className="project-detail__facts">
           <div>
-            <dt>Status</dt>
+            <dt>{content.statusLabel}</dt>
             <dd>{project.status}</dd>
           </div>
           <div>
-            <dt>Progress</dt>
+            <dt>{content.progressLabel}</dt>
             <dd>{project.progress}%</dd>
           </div>
           <div>
-            <dt>Category</dt>
+            <dt>{content.categoryLabel}</dt>
             <dd>{project.category}</dd>
           </div>
           <div>
-            <dt>Due date</dt>
+            <dt>{content.dueDateLabel}</dt>
             <dd>{project.dueDate}</dd>
           </div>
         </dl>
 
         <div className="project-detail__section">
-          <h3>Project team</h3>
+          <h3>{content.teamHeading}</h3>
           <p>{project.members.join(', ')}</p>
         </div>
         <div className="project-detail__section">
-          <h3>Technology stack</h3>
+          <h3>{content.technologyHeading}</h3>
           <div className="technology-list">
             {project.technologies.map((technology) => (
               <span key={technology}>{technology}</span>
@@ -125,7 +133,7 @@ export function ProjectDetail({ project, returnFocusTo, onClose }: ProjectDetail
         </div>
 
         <p className="project-detail__notice">
-          This local preview uses mock content and does not connect to an external demo.
+          {content.notice}
         </p>
       </section>
     </div>

@@ -218,6 +218,8 @@ a.action--secondary:hover {
 }
 
 .dashboard {
+  --dashboard-small-text: #595960;
+  --dashboard-header-small-text: #ffffff;
   min-height: 100vh;
   background: #f7f7f8;
   color: #202124;
@@ -270,7 +272,7 @@ a.action--secondary:hover {
 
 .dashboard__brand small {
   margin-top: 0.1rem;
-  color: rgb(255 255 255 / 78%);
+  color: var(--dashboard-header-small-text);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -280,7 +282,7 @@ a.action--secondary:hover {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  color: rgb(255 255 255 / 86%);
+  color: var(--dashboard-header-small-text);
   font-size: 0.85rem;
 }
 
@@ -375,7 +377,7 @@ a.action--secondary:hover {
 
 .summary-card span {
   display: block;
-  color: #76767d;
+  color: var(--dashboard-small-text);
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -399,7 +401,7 @@ a.action--secondary:hover {
 
 .dashboard__section-heading > p {
   margin: 0;
-  color: #78787f;
+  color: var(--dashboard-small-text);
   font-size: 0.86rem;
 }
 
@@ -423,7 +425,7 @@ a.action--secondary:hover {
 
 .project-search > span,
 .project-category > span {
-  color: #6c6c73;
+  color: var(--dashboard-small-text);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -467,7 +469,7 @@ a.action--secondary:hover {
   border: 1px solid #dddddf;
   border-radius: 999px;
   background: #ffffff;
-  color: #626268;
+  color: var(--dashboard-small-text);
   cursor: pointer;
   font-size: 0.78rem;
   font-weight: 700;
@@ -509,7 +511,7 @@ a.action--secondary:hover {
 .project-card__group,
 .project-card__category,
 .project-detail__group {
-  color: #73737a;
+  color: var(--dashboard-small-text);
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -623,7 +625,7 @@ a.action--secondary:hover {
 
 .project-card__facts dt,
 .project-detail__facts dt {
-  color: #85858b;
+  color: var(--dashboard-small-text);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
