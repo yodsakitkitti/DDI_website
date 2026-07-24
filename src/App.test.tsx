@@ -6,9 +6,11 @@ test('renders the DDI Sandbox page heading', () => {
   expect(screen.getByRole('heading', { name: /where ideas become innovation/i })).toBeInTheDocument();
 });
 
-test('shows unpublished actions as disabled coming soon controls', () => {
+test('links the primary hero action to the dashboard', () => {
+  window.history.pushState({}, '', '/');
   render(<App />);
-  expect(
-    screen.getByRole('button', { name: /view group projects/i }),
-  ).toBeDisabled();
+  expect(screen.getByRole('link', { name: /view group projects/i })).toHaveAttribute(
+    'href',
+    '/dashboard',
+  );
 });
