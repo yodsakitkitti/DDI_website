@@ -18,3 +18,22 @@ test('renders a primary action as an accessible link', () => {
     '#projects',
   );
 });
+
+test('renders an unpublished action as a disabled coming soon control', () => {
+  render(
+    <ActionLink
+      action={{
+        label: 'View group projects',
+        href: '#projects',
+        variant: 'primary',
+        isPublished: false,
+      }}
+    />,
+  );
+
+  expect(
+    screen.getByRole('button', {
+      name: /view group projects.*coming soon/i,
+    }),
+  ).toBeDisabled();
+});
