@@ -1,4 +1,8 @@
-import { visibleActions, type SiteAction } from './siteContent';
+import { siteContent, visibleActions, type SiteAction } from './siteContent';
+
+test('uses the supplied PNG hero asset', () => {
+  expect(siteContent.heroImageSrc).toBe('/images/ddi-sandbox-hero.png');
+});
 
 test('keeps unpublished actions available for disabled rendering', () => {
   const actions: SiteAction[] = [

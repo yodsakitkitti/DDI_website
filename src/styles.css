@@ -65,16 +65,17 @@ a {
 .hero__brand img {
   display: block;
   max-width: 40%;
-  height: auto;
   object-fit: contain;
 }
 
 .hero__university-logo {
   width: clamp(7.5rem, 15vw, 12rem);
+  height: clamp(7.64rem, 15.29vw, 12.23rem);
 }
 
 .hero__ddi-logo {
   width: clamp(4.5rem, 8vw, 7rem);
+  height: clamp(4.54rem, 8.07vw, 7.06rem);
 }
 
 .hero__content {

@@ -32,7 +32,7 @@ export const siteContent: SiteContent = {
   universityLogoAlt: 'University logo',
   ddiLogoSrc: '/images/ddi-logo.png',
   ddiLogoAlt: 'DDI logo',
-  heroImageSrc: '/images/ddi-sandbox-hero.jpg',
+  heroImageSrc: '/images/ddi-sandbox-hero.png',
   actions: [
     { label: 'View Group Projects', href: '#projects', variant: 'primary', isPublished: false },
     { label: 'Learn more about the Sandbox', href: '#about', variant: 'secondary', isPublished: false },
