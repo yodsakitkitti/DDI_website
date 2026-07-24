@@ -1,3 +1,6 @@
+import { Hero } from './components/Hero';
+import { siteContent } from './content/siteContent';
+
 export default function App() {
-  return <h1>Where Ideas Become Innovation</h1>;
+  return <Hero content={siteContent} />;
 }
