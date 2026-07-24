@@ -27,7 +27,7 @@ The first delivery is static: no database, authentication, admin panel, or CMS. 
 
 ## Content behaviour
 
-Every public string and URL is supplied by the content module. A content item with `isPublished: false` is not rendered. This keeps unfinished information out of the live page while allowing the design to be extended later without a structural rewrite.
+Every public string and URL is supplied by the content module. Optional content blocks with `isPublished: false` are not rendered. Calls to action remain visible as disabled “Coming soon” controls until their destination is published, preserving the approved hero layout without exposing invented information.
 
 ## Testing and verification
 
