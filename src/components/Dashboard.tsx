@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import {
   filterProjects,
   getDashboardSummary,
@@ -21,10 +21,11 @@ export function Dashboard({ projects }: { projects: Project[] }) {
   const [status, setStatus] = useState<'All' | ProjectStatus>('All');
   const [category, setCategory] = useState('All Categories');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const lastViewDemoTrigger = useRef<HTMLButtonElement | null>(null);
 
   const summary = getDashboardSummary(projects);
   const categories = useMemo(
-    () => ['All Categories', ...new Set(projects.map((project) => project.category))],
+    () => ['All Categories', ...new Set([...projects.map((project) => project.category), 'Other'])],
     [projects],
   );
   const visibleProjects = filterProjects(projects, query, status, category);
@@ -126,7 +127,10 @@ export function Dashboard({ projects }: { projects: Project[] }) {
                 <ProjectCard
                   key={project.id}
                   project={project}
-                  onView={() => setSelectedProject(project)}
+                  onView={(event) => {
+                    lastViewDemoTrigger.current = event.currentTarget;
+                    setSelectedProject(project);
+                  }}
                 />
               ))}
             </div>
@@ -140,7 +144,11 @@ export function Dashboard({ projects }: { projects: Project[] }) {
       </div>
 
       {selectedProject ? (
-        <ProjectDetail project={selectedProject} onClose={() => setSelectedProject(null)} />
+        <ProjectDetail
+          project={selectedProject}
+          returnFocusTo={lastViewDemoTrigger.current}
+          onClose={() => setSelectedProject(null)}
+        />
       ) : null}
     </main>
   );

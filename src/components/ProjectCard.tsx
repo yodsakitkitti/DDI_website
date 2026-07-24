@@ -1,8 +1,9 @@
+import type { MouseEvent } from 'react';
 import type { Project } from '../content/siteContent';
 
 interface ProjectCardProps {
   project: Project;
-  onView: () => void;
+  onView: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export function ProjectCard({ project, onView }: ProjectCardProps) {
