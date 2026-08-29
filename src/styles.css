@@ -350,7 +350,7 @@ a.action--secondary:hover {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
   margin-top: 2.25rem;
 }
@@ -500,8 +500,7 @@ a.action--secondary:hover {
 }
 
 .project-card__topline,
-.project-card__heading,
-.project-progress__label {
+.project-card__heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -525,22 +524,17 @@ a.action--secondary:hover {
   font-weight: 800;
 }
 
-.status-pill--completed {
+.status-pill--published {
   background: #eaf7ef;
   color: #17763d;
 }
 
-.status-pill--in-progress {
+.status-pill--ready-for-review {
   background: #fff3dd;
   color: #966100;
 }
 
-.status-pill--review {
-  background: #eeeaff;
-  color: #5740a3;
-}
-
-.status-pill--planning {
+.status-pill--awaiting-information {
   background: #eceef1;
   color: #555b65;
 }
@@ -578,36 +572,6 @@ a.action--secondary:hover {
   color: #68686f;
   font-size: 0.9rem;
   line-height: 1.65;
-}
-
-.project-progress {
-  padding: 0.95rem 0;
-  border-top: 1px solid #eeeeef;
-  border-bottom: 1px solid #eeeeef;
-}
-
-.project-progress__label {
-  color: #717178;
-  font-size: 0.78rem;
-}
-
-.project-progress__label strong {
-  color: #d71920;
-}
-
-.project-progress__track {
-  height: 0.45rem;
-  margin-top: 0.55rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background: #ededf0;
-}
-
-.project-progress__track span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: #d71920;
 }
 
 .project-card__facts,

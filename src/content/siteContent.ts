@@ -20,32 +20,22 @@ export interface SiteContent {
   actions: SiteAction[];
 }
 
-export type ProjectStatus = 'Completed' | 'In Progress' | 'Review' | 'Planning';
-export type ProjectStatusFilter = 'All' | ProjectStatus;
+import { type ProfileStatusFilter, type Project } from './ventureProfiles';
 
-export interface Project {
-  id: string;
-  groupLabel: string;
-  name: string;
-  status: ProjectStatus;
-  progress: number;
-  description: string;
-  members: string[];
-  dueDate: string;
-  category: string;
-  technologies: string[];
-}
+export { projects } from './ventureProfiles';
+export type { ProfileStatusFilter, Project } from './ventureProfiles';
 
 export interface DashboardStatusOption {
-  value: ProjectStatusFilter;
+  value: ProfileStatusFilter;
   label: string;
 }
 
 export interface DashboardSummaryLabels {
-  total: string;
-  completed: string;
-  inProgress: string;
-  averageProgress: string;
+  activeTeams: string;
+  alumniVentures: string;
+  publishedProfiles: string;
+  readyForReview: string;
+  awaitingInformation: string;
 }
 
 export interface DashboardProjectCount {
@@ -54,22 +44,23 @@ export interface DashboardProjectCount {
 }
 
 export interface DashboardCardContent {
-  progressLabel: string;
+  ventureTypeLabel: string;
   teamLabel: string;
-  dueDateLabel: string;
   memberSingular: string;
   memberPlural: string;
+  memberUnknownLabel: string;
   technologiesLabel: string;
-  viewDemoLabel: string;
+  viewProfileLabel: string;
 }
 
 export interface DashboardDetailContent {
   closeLabel: string;
-  statusLabel: string;
-  progressLabel: string;
+  profileStatusLabel: string;
+  ventureTypeLabel: string;
   categoryLabel: string;
-  dueDateLabel: string;
+  semesterLabel: string;
   teamHeading: string;
+  contactHeading: string;
   technologyHeading: string;
   notice: string;
 }
@@ -83,8 +74,8 @@ export interface DashboardContent {
   eyebrow: string;
   title: string;
   subtitle: string;
-  mockDataLabel: string;
-  exampleProjectLabel: string;
+  dataStatusLabel: string;
+  profileLabel: string;
   summaryAriaLabel: string;
   summaryLabels: DashboardSummaryLabels;
   projectsEyebrow: string;
@@ -126,89 +117,75 @@ export const dashboardContent: DashboardContent = {
   brandSection: 'Project Dashboard',
   brandHomeLabel: 'DDI Sandbox home',
   homeLabel: 'Home',
-  academicYear: 'Academic Year 2025–2026',
+  academicYear: 'Current semester',
   eyebrow: 'DDI Sandbox showcase',
   title: 'Project Dashboard',
-  subtitle: 'Explore an example student project created to demonstrate this dashboard experience.',
-  mockDataLabel: 'Mock data',
-  exampleProjectLabel: 'Example project',
-  summaryAriaLabel: 'Project summary',
+  subtitle: 'Explore current DDI Sandbox teams and past achievements as verified profiles are collected and published.',
+  dataStatusLabel: 'Phase 2 · Content publication',
+  profileLabel: 'Venture profile',
+  summaryAriaLabel: 'Content publication summary',
   summaryLabels: {
-    total: 'Total Projects',
-    completed: 'Completed',
-    inProgress: 'In Progress',
-    averageProgress: 'Average Progress',
+    activeTeams: 'Active Teams',
+    alumniVentures: 'Alumni Ventures',
+    publishedProfiles: 'Published Profiles',
+    readyForReview: 'Ready for Review',
+    awaitingInformation: 'Awaiting Content',
   },
-  projectsEyebrow: 'Example records',
-  projectsTitle: 'Group Projects',
+  projectsEyebrow: 'Current semester and alumni',
+  projectsTitle: 'Venture Profiles',
   projectCount: {
-    singular: 'mock project',
-    plural: 'mock projects',
+    singular: 'venture profile',
+    plural: 'venture profiles',
   },
-  searchLabel: 'Search projects',
-  searchPlaceholder: 'Search projects',
-  statusFilterLabel: 'Filter projects by status',
+  searchLabel: 'Search venture profiles',
+  searchPlaceholder: 'Search teams and ventures',
+  statusFilterLabel: 'Filter profiles by publication status',
   statusOptions: [
     { value: 'All', label: 'All' },
-    { value: 'Completed', label: 'Completed' },
-    { value: 'In Progress', label: 'In Progress' },
-    { value: 'Review', label: 'Review' },
-    { value: 'Planning', label: 'Planning' },
+    { value: 'Awaiting information', label: 'Awaiting information' },
+    { value: 'Ready for review', label: 'Ready for review' },
+    { value: 'Published', label: 'Published' },
   ],
   categoryLabel: 'Category',
   allCategoriesLabel: 'All Categories',
-  noResultsTitle: 'No mock projects match your filters.',
-  noResultsHint: 'Try a different search, status, or category.',
+  noResultsTitle: 'No venture profiles match your filters.',
+  noResultsHint: 'Try a different search, publication status, or category.',
   card: {
-    progressLabel: 'Progress',
+    ventureTypeLabel: 'Venture type',
     teamLabel: 'Team',
-    dueDateLabel: 'Due date',
     memberSingular: 'member',
     memberPlural: 'members',
+    memberUnknownLabel: 'To be confirmed',
     technologiesLabel: 'Technologies',
-    viewDemoLabel: 'View Demo',
+    viewProfileLabel: 'View Profile',
   },
   detail: {
     closeLabel: 'Close project details',
-    statusLabel: 'Status',
-    progressLabel: 'Progress',
+    profileStatusLabel: 'Profile status',
+    ventureTypeLabel: 'Venture type',
     categoryLabel: 'Category',
-    dueDateLabel: 'Due date',
+    semesterLabel: 'Semester',
     teamHeading: 'Project team',
+    contactHeading: 'Contact person',
     technologyHeading: 'Technology stack',
-    notice: 'This local preview uses mock content and does not connect to an external demo.',
+    notice: 'This profile will be updated after the team information is verified.',
   },
 };
 
-export const projects: Project[] = [
-  {
-    id: 'smart-campus-navigator',
-    groupLabel: 'Group 1',
-    name: 'Smart Campus Navigator',
-    status: 'Completed',
-    progress: 100,
-    description:
-      'An AI-powered indoor navigation concept for university campuses using BLE beacons and mobile wayfinding.',
-    members: ['Ava Chen', 'Narin S.', 'Ploy K.', 'Thanawat R.'],
-    dueDate: 'Jun 10, 2026',
-    category: 'IoT',
-    technologies: ['React Native', 'Python', 'TensorFlow', 'Arduino'],
-  },
-];
-
 export const getDashboardSummary = (items: Project[]) => ({
-  total: items.length,
-  completed: items.filter((project) => project.status === 'Completed').length,
-  inProgress: items.filter((project) => project.status === 'In Progress').length,
-  averageProgress: items.length
-    ? Math.round(items.reduce((total, project) => total + project.progress, 0) / items.length)
-    : 0,
+  activeTeams: items.filter((project) => project.ventureType === 'Active team').length,
+  alumniVentures: items.filter((project) => project.ventureType === 'Alumni venture').length,
+  publishedProfiles: items.filter((project) => project.profileStatus === 'Published').length,
+  readyForReview: items.filter((project) => project.profileStatus === 'Ready for review').length,
+  awaitingInformation: items.filter(
+    (project) => project.profileStatus === 'Awaiting information',
+  ).length,
 });
 
 export const filterProjects = (
   items: Project[],
   query: string,
-  status: ProjectStatusFilter,
+  status: ProfileStatusFilter,
   category: string,
 ) => {
   const normalizedQuery = query.trim().toLowerCase();
@@ -218,6 +195,10 @@ export const filterProjects = (
       project.name,
       project.description,
       project.category,
+      project.groupLabel,
+      project.ventureType,
+      project.profileStatus,
+      project.contactPerson,
       ...project.members,
     ]
       .join(' ')
@@ -225,7 +206,7 @@ export const filterProjects = (
 
     return (
       (!normalizedQuery || searchable.includes(normalizedQuery)) &&
-      (status === 'All' || project.status === status) &&
+      (status === 'All' || project.profileStatus === status) &&
       (category === 'All Categories' || project.category === category)
     );
   });

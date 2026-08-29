@@ -4,7 +4,7 @@ import {
   getDashboardSummary,
   type DashboardContent,
   type Project,
-  type ProjectStatusFilter,
+  type ProfileStatusFilter,
 } from '../content/siteContent';
 import { ProjectCard } from './ProjectCard';
 import { ProjectDetail } from './ProjectDetail';
@@ -16,10 +16,10 @@ interface DashboardProps {
 
 export function Dashboard({ content, projects }: DashboardProps) {
   const [query, setQuery] = useState('');
-  const [status, setStatus] = useState<ProjectStatusFilter>('All');
+  const [status, setStatus] = useState<ProfileStatusFilter>('All');
   const [category, setCategory] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const lastViewDemoTrigger = useRef<HTMLButtonElement | null>(null);
+  const lastProfileTrigger = useRef<HTMLButtonElement | null>(null);
 
   const summary = getDashboardSummary(projects);
   const categories = useMemo(
@@ -35,10 +35,11 @@ export function Dashboard({ content, projects }: DashboardProps) {
   const projectCountLabel =
     visibleProjects.length === 1 ? content.projectCount.singular : content.projectCount.plural;
   const summaryCards = [
-    { label: content.summaryLabels.total, value: summary.total },
-    { label: content.summaryLabels.completed, value: summary.completed },
-    { label: content.summaryLabels.inProgress, value: summary.inProgress },
-    { label: content.summaryLabels.averageProgress, value: `${summary.averageProgress}%` },
+    { label: content.summaryLabels.activeTeams, value: summary.activeTeams },
+    { label: content.summaryLabels.alumniVentures, value: summary.alumniVentures },
+    { label: content.summaryLabels.publishedProfiles, value: summary.publishedProfiles },
+    { label: content.summaryLabels.readyForReview, value: summary.readyForReview },
+    { label: content.summaryLabels.awaitingInformation, value: summary.awaitingInformation },
   ];
 
   return (
@@ -68,7 +69,7 @@ export function Dashboard({ content, projects }: DashboardProps) {
             <h1 id="dashboard-title">{content.title}</h1>
             <p>{content.subtitle}</p>
           </div>
-          <span className="dashboard__example-label">{content.mockDataLabel}</span>
+          <span className="dashboard__example-label">{content.dataStatusLabel}</span>
         </section>
 
         <section className="summary-grid" aria-label={content.summaryAriaLabel}>
@@ -141,9 +142,9 @@ export function Dashboard({ content, projects }: DashboardProps) {
                   key={project.id}
                   project={project}
                   content={content.card}
-                  exampleProjectLabel={content.exampleProjectLabel}
+                  profileLabel={content.profileLabel}
                   onView={(event) => {
-                    lastViewDemoTrigger.current = event.currentTarget;
+                    lastProfileTrigger.current = event.currentTarget;
                     setSelectedProject(project);
                   }}
                 />
@@ -162,8 +163,8 @@ export function Dashboard({ content, projects }: DashboardProps) {
         <ProjectDetail
           project={selectedProject}
           content={content.detail}
-          exampleProjectLabel={content.exampleProjectLabel}
-          returnFocusTo={lastViewDemoTrigger.current}
+          profileLabel={content.profileLabel}
+          returnFocusTo={lastProfileTrigger.current}
           onClose={() => setSelectedProject(null)}
         />
       ) : null}

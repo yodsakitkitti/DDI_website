@@ -3,7 +3,7 @@ import type { DashboardDetailContent, Project } from '../content/siteContent';
 
 interface ProjectDetailProps {
   content: DashboardDetailContent;
-  exampleProjectLabel: string;
+  profileLabel: string;
   project: Project;
   returnFocusTo: HTMLElement | null;
   onClose: () => void;
@@ -11,7 +11,7 @@ interface ProjectDetailProps {
 
 export function ProjectDetail({
   content,
-  exampleProjectLabel,
+  profileLabel,
   project,
   returnFocusTo,
   onClose,
@@ -83,7 +83,7 @@ export function ProjectDetail({
       >
         <div className="project-detail__header">
           <div>
-            <span className="project-detail__example">{exampleProjectLabel}</span>
+            <span className="project-detail__example">{profileLabel}</span>
             <h2>{project.name}</h2>
           </div>
           <button
@@ -102,39 +102,45 @@ export function ProjectDetail({
 
         <dl className="project-detail__facts">
           <div>
-            <dt>{content.statusLabel}</dt>
-            <dd>{project.status}</dd>
+            <dt>{content.profileStatusLabel}</dt>
+            <dd>{project.profileStatus}</dd>
           </div>
           <div>
-            <dt>{content.progressLabel}</dt>
-            <dd>{project.progress}%</dd>
+            <dt>{content.ventureTypeLabel}</dt>
+            <dd>{project.ventureType}</dd>
           </div>
           <div>
             <dt>{content.categoryLabel}</dt>
             <dd>{project.category}</dd>
           </div>
           <div>
-            <dt>{content.dueDateLabel}</dt>
-            <dd>{project.dueDate}</dd>
+            <dt>{content.semesterLabel}</dt>
+            <dd>{project.semester}</dd>
           </div>
         </dl>
 
         <div className="project-detail__section">
           <h3>{content.teamHeading}</h3>
-          <p>{project.members.join(', ')}</p>
+          <p>{project.members.length ? project.members.join(', ') : 'To be confirmed'}</p>
         </div>
         <div className="project-detail__section">
-          <h3>{content.technologyHeading}</h3>
-          <div className="technology-list">
-            {project.technologies.map((technology) => (
-              <span key={technology}>{technology}</span>
-            ))}
-          </div>
+          <h3>{content.contactHeading}</h3>
+          <p>{project.contactPerson}</p>
         </div>
+        {project.technologies.length ? (
+          <div className="project-detail__section">
+            <h3>{content.technologyHeading}</h3>
+            <div className="technology-list">
+              {project.technologies.map((technology) => (
+                <span key={technology}>{technology}</span>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
-        <p className="project-detail__notice">
-          {content.notice}
-        </p>
+        {project.profileStatus === 'Published' ? null : (
+          <p className="project-detail__notice">{content.notice}</p>
+        )}
       </section>
     </div>
   );
