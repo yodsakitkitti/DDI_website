@@ -1,11 +1,5 @@
-import { useMemo, useRef, useState } from 'react';
-import {
-  filterProjects,
-  getDashboardSummary,
-  type DashboardContent,
-  type Project,
-  type ProfileStatusFilter,
-} from '../content/siteContent';
+import { useRef, useState } from 'react';
+import type { DashboardContent, Project } from '../content/siteContent';
 import { ProjectCard } from './ProjectCard';
 import { ProjectDetail } from './ProjectDetail';
 
@@ -15,32 +9,8 @@ interface DashboardProps {
 }
 
 export function Dashboard({ content, projects }: DashboardProps) {
-  const [query, setQuery] = useState('');
-  const [status, setStatus] = useState<ProfileStatusFilter>('All');
-  const [category, setCategory] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const lastProfileTrigger = useRef<HTMLButtonElement | null>(null);
-
-  const summary = getDashboardSummary(projects);
-  const categories = useMemo(
-    () => [...new Set(projects.map((project) => project.category))],
-    [projects],
-  );
-  const visibleProjects = filterProjects(
-    projects,
-    query,
-    status,
-    category ?? 'All Categories',
-  );
-  const projectCountLabel =
-    visibleProjects.length === 1 ? content.projectCount.singular : content.projectCount.plural;
-  const summaryCards = [
-    { label: content.summaryLabels.activeTeams, value: summary.activeTeams },
-    { label: content.summaryLabels.alumniVentures, value: summary.alumniVentures },
-    { label: content.summaryLabels.publishedProfiles, value: summary.publishedProfiles },
-    { label: content.summaryLabels.readyForReview, value: summary.readyForReview },
-    { label: content.summaryLabels.awaitingInformation, value: summary.awaitingInformation },
-  ];
 
   return (
     <main className="dashboard">
@@ -69,16 +39,6 @@ export function Dashboard({ content, projects }: DashboardProps) {
             <h1 id="dashboard-title">{content.title}</h1>
             <p>{content.subtitle}</p>
           </div>
-          <span className="dashboard__example-label">{content.dataStatusLabel}</span>
-        </section>
-
-        <section className="summary-grid" aria-label={content.summaryAriaLabel}>
-          {summaryCards.map((card) => (
-            <article className="summary-card" key={card.label}>
-              <span>{card.label}</span>
-              <strong>{card.value}</strong>
-            </article>
-          ))}
         </section>
 
         <section className="dashboard__projects" aria-labelledby="projects-title">
@@ -87,75 +47,22 @@ export function Dashboard({ content, projects }: DashboardProps) {
               <p className="dashboard__eyebrow">{content.projectsEyebrow}</p>
               <h2 id="projects-title">{content.projectsTitle}</h2>
             </div>
-            <p role="status" aria-live="polite" aria-atomic="true">
-              {visibleProjects.length} {projectCountLabel}
-            </p>
           </div>
 
-          <div className="project-toolbar">
-            <label className="project-search">
-              <span>{content.searchLabel}</span>
-              <input
-                type="search"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder={content.searchPlaceholder}
+          <div className="project-grid">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                content={content.card}
+                profileLabel={content.profileLabel}
+                onView={(event) => {
+                  lastProfileTrigger.current = event.currentTarget;
+                  setSelectedProject(project);
+                }}
               />
-            </label>
-
-            <div
-              className="project-filters"
-              role="group"
-              aria-label={content.statusFilterLabel}
-            >
-              {content.statusOptions.map((option) => (
-                <button
-                  type="button"
-                  className={status === option.value ? 'is-active' : undefined}
-                  aria-pressed={status === option.value}
-                  onClick={() => setStatus(option.value)}
-                  key={option.value}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-
-            <label className="project-category">
-              <span>{content.categoryLabel}</span>
-              <select
-                value={category ?? ''}
-                onChange={(event) => setCategory(event.target.value || null)}
-              >
-                <option value="">{content.allCategoriesLabel}</option>
-                {categories.map((option) => (
-                  <option key={option}>{option}</option>
-                ))}
-              </select>
-            </label>
+            ))}
           </div>
-
-          {visibleProjects.length ? (
-            <div className="project-grid">
-              {visibleProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  content={content.card}
-                  profileLabel={content.profileLabel}
-                  onView={(event) => {
-                    lastProfileTrigger.current = event.currentTarget;
-                    setSelectedProject(project);
-                  }}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="project-empty">
-              <strong>{content.noResultsTitle}</strong>
-              <span>{content.noResultsHint}</span>
-            </div>
-          )}
         </section>
       </div>
 

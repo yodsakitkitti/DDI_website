@@ -14,16 +14,11 @@ export function ProjectCard({
   project,
   onView,
 }: ProjectCardProps) {
-  const statusClass = project.profileStatus.toLowerCase().replace(/ /g, '-');
-  const memberLabel =
-    project.members.length === 1 ? content.memberSingular : content.memberPlural;
-
   return (
     <article className="project-card">
-      <div className="project-card__topline">
-        <span className="project-card__group">{project.groupLabel}</span>
-        <span className={`status-pill status-pill--${statusClass}`}>{project.profileStatus}</span>
-      </div>
+      {project.logoSrc ? (
+        <img className="project-card__logo" src={project.logoSrc} alt={`${project.name} logo`} loading="lazy" />
+      ) : null}
 
       <div className="project-card__heading">
         <div>
@@ -34,29 +29,6 @@ export function ProjectCard({
       </div>
 
       <p className="project-card__description">{project.description}</p>
-
-      <dl className="project-card__facts">
-        <div>
-          <dt>{content.ventureTypeLabel}</dt>
-          <dd>{project.ventureType}</dd>
-        </div>
-        <div>
-          <dt>{content.teamLabel}</dt>
-          <dd>
-            {project.members.length
-              ? `${project.members.length} ${memberLabel}`
-              : content.memberUnknownLabel}
-          </dd>
-        </div>
-      </dl>
-
-      {project.technologies.length ? (
-        <div className="technology-list" aria-label={content.technologiesLabel}>
-          {project.technologies.map((technology) => (
-            <span key={technology}>{technology}</span>
-          ))}
-        </div>
-      ) : null}
 
       <button
         className="project-card__action"
