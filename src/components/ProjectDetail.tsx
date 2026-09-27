@@ -97,50 +97,19 @@ export function ProjectDetail({
           </button>
         </div>
 
-        <span className="project-detail__group">{project.groupLabel}</span>
-        <p>{project.description}</p>
+        {project.logoSrc ? (
+          <img className="project-detail__logo" src={project.logoSrc} alt={`${project.name} logo`} />
+        ) : null}
 
-        <dl className="project-detail__facts">
-          <div>
-            <dt>{content.profileStatusLabel}</dt>
-            <dd>{project.profileStatus}</dd>
-          </div>
-          <div>
-            <dt>{content.ventureTypeLabel}</dt>
-            <dd>{project.ventureType}</dd>
-          </div>
-          <div>
-            <dt>{content.categoryLabel}</dt>
-            <dd>{project.category}</dd>
-          </div>
-          <div>
-            <dt>{content.semesterLabel}</dt>
-            <dd>{project.semester}</dd>
-          </div>
-        </dl>
-
-        <div className="project-detail__section">
-          <h3>{content.teamHeading}</h3>
-          <p>{project.members.length ? project.members.join(', ') : 'To be confirmed'}</p>
-        </div>
-        <div className="project-detail__section">
-          <h3>{content.contactHeading}</h3>
-          <p>{project.contactPerson}</p>
-        </div>
-        {project.technologies.length ? (
-          <div className="project-detail__section">
-            <h3>{content.technologyHeading}</h3>
-            <div className="technology-list">
-              {project.technologies.map((technology) => (
-                <span key={technology}>{technology}</span>
-              ))}
-            </div>
+        <span className="project-detail__group">{project.category}</span>
+        <p className="project-detail__description">{project.description}</p>
+        {project.descriptionTh ? (
+          <div className="project-detail__section" lang="th">
+            <h3>ภาษาไทย</h3>
+            <p className="project-detail__description">{project.descriptionTh}</p>
           </div>
         ) : null}
 
-        {project.profileStatus === 'Published' ? null : (
-          <p className="project-detail__notice">{content.notice}</p>
-        )}
       </section>
     </div>
   );
