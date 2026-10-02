@@ -1,54 +1,39 @@
-# DDI Sandbox design QA
+# DDI Sandbox redesign QA
 
-## Current verification status
+Verified on 3 October 2026.
 
-The supplied visual assets are integrated and served correctly. Automated and
-static responsive checks are complete. Live browser comparison is blocked
-because this Codex session has no available browser backend.
+## Content
 
-## Verified
+- Ten venture profiles: the existing six plus PACE, Creator House, YOS, and MEGURI.
+- Supplied logo files copied unchanged. YOS uses the supplied CTRL + A artwork.
+- MEGURI includes English and Thai descriptions from the supplied ZIP and its team photo.
+- Original Assumption University and DDI marks remain in the About section.
 
-- The page content contract references `/images/ddi-sandbox-hero.png`.
-- The university, DDI, and hero assets all return HTTP 200 from the specified
-  Vite development server with `Content-Type: image/png`.
-- Served byte lengths match the supplied originals:
-  - university mark: 134,239 bytes;
-  - DDI mark: 46,359 bytes;
-  - hero: 133,341 bytes.
-- The hero image uses `background-size: cover` and centered positioning.
-- The dark `hero::before` gradient overlay remains above the background and
-  behind the content.
-- Both brand images have explicit responsive width and height values, with
-  `object-fit: contain`.
-- The headline remains content-driven and has the required split white/red
-  treatment.
-- Component tests verify that both unpublished actions are rendered as native
-  disabled buttons with accessible “Coming soon” names.
-- The stylesheet retains a visible three-pixel `:focus-visible` outline for
-  enabled actions and disables motion when reduced motion is requested.
-- The mobile breakpoint at 639px reduces brand padding and stacks both actions
-  at full width.
+## Interaction and accessibility
 
-## Browser checks not completed
+- Four-venture spotlight selector and next button, with direct profile links.
+- Search across names, categories, English descriptions, and supplied Thai descriptions.
+- Category filters, saved favorites persisted in local browser storage, grid/list layouts, and random discovery.
+- Empty-state reset and a status message when browser storage cannot persist favorites.
+- Modal keyboard focus containment, Escape dismissal, background inertness, scroll lock, and focus restoration.
+- Browser Back and profile deep links covered by regression tests.
+- Reduced-motion preferences disable decorative animation and smooth scrolling.
+- Main and secondary text colors meet WCAG AA contrast against the page background.
 
-The approved browser workflow returned `No browser is available` when opening
-`http://127.0.0.1:4173/`. Therefore the following checks could not be observed
-interactively:
+## Verification
 
-- desktop comparison against the Figma Make reference;
-- mobile viewport comparison;
-- rendered crop and contrast assessment;
-- live Tab-key focus traversal.
+- Production build: `npm run build`.
+- Automated suite: `npm test -- --run` (26 tests).
+- Real browser inspection of desktop and 390 px / 320 px mobile layouts.
+- Verified spotlight selection, saved-favorite persistence after reload, list layout, search, profile dismissal, and MEGURI image loading.
+- Corrected decorative horizontal overflow and the narrow-screen minimum body width.
 
-No alternate screenshot or browser automation path was used.
+## Preview and deployment
 
-## Material differences and concerns
+Run `npm run dev -- --host 127.0.0.1` for the local preview. The production output is generated in `dist/`. This task updates the local project; it does not publish a remote deployment.
 
-- No P0-P2 issue was identified by automated or static inspection.
-- Pixel parity with the Figma reference is unconfirmed.
-- The supplied logo PNGs include their original white canvas. Their bytes were
-  preserved exactly as required; removing the canvas would alter the source
-  assets.
-- The supplied hero is 480×238. `background-size: cover` will upscale it on
-  common desktop displays, so sharpness and crop should be checked when a
-  browser becomes available.
+Fonts use Google Fonts with local sans-serif fallbacks. Supplied artwork is preserved and displayed with CSS containment; team images are not generated or retouched.
+
+## Original visuals restored
+
+The university crest and original DDI logo now appear prominently in the shared header. The original campus/DDI image is restored as the opening section background with a light overlay for readability. Verified logo loading and the 390 px mobile layout; the existing interactive features remain in place.

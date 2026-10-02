@@ -1,11 +1,13 @@
-import { useEffect, useRef, type KeyboardEvent } from 'react';
-import type { DashboardDetailContent, Project } from '../content/siteContent';
+import { useEffect, useRef, type KeyboardEvent, type RefObject } from "react";
+import type { DashboardDetailContent, Project } from "../content/siteContent";
+import { Arrow } from "./Icons";
 
 interface ProjectDetailProps {
   content: DashboardDetailContent;
   profileLabel: string;
   project: Project;
   returnFocusTo: HTMLElement | null;
+  fallbackFocusRef: RefObject<HTMLElement | null>;
   onClose: () => void;
 }
 
@@ -14,12 +16,15 @@ export function ProjectDetail({
   profileLabel,
   project,
   returnFocusTo,
+  fallbackFocusRef,
   onClose,
 }: ProjectDetailProps) {
   const dialogRef = useRef<HTMLElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const keepFocusInside = (event: FocusEvent) => {
       if (
         dialogRef.current &&
@@ -31,22 +36,26 @@ export function ProjectDetail({
     };
 
     closeButtonRef.current?.focus();
-    document.addEventListener('focusin', keepFocusInside);
+    document.addEventListener("focusin", keepFocusInside);
 
     return () => {
-      document.removeEventListener('focusin', keepFocusInside);
-      returnFocusTo?.focus();
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("focusin", keepFocusInside);
+      const focusTarget = returnFocusTo?.isConnected
+        ? returnFocusTo
+        : fallbackFocusRef.current;
+      focusTarget?.focus();
     };
-  }, [returnFocusTo]);
+  }, [returnFocusTo, fallbackFocusRef]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       event.preventDefault();
       onClose();
       return;
     }
 
-    if (event.key !== 'Tab') {
+    if (event.key !== "Tab") {
       return;
     }
 
@@ -72,10 +81,15 @@ export function ProjectDetail({
   };
 
   return (
-    <div className="project-detail-backdrop">
+    <div
+      className="project-detail-backdrop"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
       <section
         ref={dialogRef}
-        className="project-detail"
+        className={`project-detail theme-${project.id}`}
         role="dialog"
         aria-modal="true"
         aria-label={project.name}
@@ -98,18 +112,43 @@ export function ProjectDetail({
         </div>
 
         {project.logoSrc ? (
-          <img className="project-detail__logo" src={project.logoSrc} alt={`${project.name} logo`} />
+          <div className="project-detail__art">
+            <img
+              className="project-detail__logo"
+              src={project.logoSrc}
+              alt={`${project.name} logo`}
+            />
+          </div>
         ) : null}
 
         <span className="project-detail__group">{project.category}</span>
+        <h3 className="project-detail__tagline">{project.summary}</h3>
         <p className="project-detail__description">{project.description}</p>
         {project.descriptionTh ? (
           <div className="project-detail__section" lang="th">
             <h3>ภาษาไทย</h3>
-            <p className="project-detail__description">{project.descriptionTh}</p>
+            <p className="project-detail__description">
+              {project.descriptionTh}
+            </p>
           </div>
         ) : null}
 
+        {project.teamImageSrc && (
+          <figure className="project-detail__team">
+            <img
+              src={project.teamImageSrc}
+              alt="The MEGURI team in matching pink jackets"
+              loading="lazy"
+            />
+            <figcaption>The people behind MEGURI</figcaption>
+          </figure>
+        )}
+        <div className="project-detail__footer">
+          <span>Part of the DDI Sandbox collective</span>
+          <button type="button" className="text-link" onClick={onClose}>
+            Back to ventures <Arrow />
+          </button>
+        </div>
       </section>
     </div>
   );
