@@ -1,5 +1,17 @@
 # DDI Sandbox redesign QA
 
+## Cyber-Tribal style — 6 October 2026
+
+- Applied the supplied style across the landing page, venture explorer, and profile dialogs.
+- Dark surfaces, softened cyan/green/magenta/purple accents, technical metadata, and original inline SVG organic geometry.
+- Azonix is named as the preferred display font; no Azonix file was supplied, so Space Grotesk is the active fallback. JetBrains Mono is used for metadata.
+- Existing university, DDI, venture artwork, and campus background remain local assets with their original colors.
+- Asymmetric two-column venture layouts collapse to one column below 768 px. Buttons, panels, and dialogs use 8 px corners.
+- Decorative motion uses transform and opacity and respects reduced-motion preferences.
+- Production build passed outside the sandbox (the sandbox cannot resolve the existing dependency junctions correctly). All 26 automated tests passed with a workspace-local temporary directory.
+- Browser checked desktop landing, mobile landing and explorer, mobile search narrowing to MEGURI, and the MEGURI profile dialog. Mobile landing has no horizontal document overflow.
+- Preview: `http://127.0.0.1:5174/`.
+
 Verified on 3 October 2026.
 
 ## Content

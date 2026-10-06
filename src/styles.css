@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;650;700;750&family=Manrope:wght@400;500;600;650;700;750;800&display=swap");
 :root {
-  --paper: #f7f5ef;
-  --ink: #242621;
-  --muted: #65665e;
-  --red: #bd352b;
-  --line: #ddddd3;
+  --paper: #070911;
+  --ink: #e6edf5;
+  --muted: #a0aec0;
+  --red: #45dede;
+  --line: #273041;
   --font: "DM Sans", Arial, sans-serif;
   font-family: var(--font);
   color: var(--ink);

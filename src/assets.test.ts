@@ -47,7 +47,7 @@ const contrastRatio = (foreground: string, background: string) => {
   return (lighter + 0.05) / (darker + 0.05);
 };
 
-test('uses WCAG AA text contrast for the paper theme', () => {
+test('uses WCAG AA text contrast for the dark theme', () => {
   const styles = readFileSync(resolve(process.cwd(), 'src/styles.css'), 'utf8');
   const ink = styles.match(/--ink:\s*(#[0-9a-f]{6})/i)?.[1];
   const paper = styles.match(/--paper:\s*(#[0-9a-f]{6})/i)?.[1];

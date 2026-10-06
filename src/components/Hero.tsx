@@ -15,7 +15,7 @@ export function Hero({ content }: { content: SiteContent }) {
         <div
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(90deg, rgba(247, 245, 239, 0.97) 0%, rgba(247, 245, 239, 0.88) 38%, rgba(247, 245, 239, 0.56) 100%), url(${content.heroImageSrc})`,
+            backgroundImage: `linear-gradient(90deg, rgba(7, 9, 17, 0.98) 0%, rgba(7, 9, 17, 0.94) 38%, rgba(7, 9, 17, 0.86) 100%), url(${content.heroImageSrc})`,
           }}
         >
           <section className="hero wrap" aria-labelledby="hero-heading">
@@ -54,9 +54,9 @@ export function Hero({ content }: { content: SiteContent }) {
               </div>
               <div className="hero__social-proof">
                 <span className="mini-marks" aria-hidden="true">
-                  <span>✳</span>
-                  <span>↗</span>
-                  <span>✦</span>
+                  <span><Spark /></span>
+                  <span><Arrow diagonal /></span>
+                  <span><Spark /></span>
                 </span>
                 <p>
                   <strong>{projects.length} teams. Endless possibilities.</strong>
@@ -66,12 +66,28 @@ export function Hero({ content }: { content: SiteContent }) {
               </div>
             </div>
             <div className="spotlight" aria-label="New venture spotlight">
+              <svg className="cyber-sigil" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="sigil-color" x1="0" y1="0" x2="600" y2="600" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#45dede" /><stop offset="0.55" stopColor="#9f51e8" /><stop offset="1" stopColor="#e94fc9" />
+                  </linearGradient>
+                </defs>
+                <g stroke="url(#sigil-color)" strokeWidth="2">
+                  <circle cx="300" cy="300" r="254" strokeDasharray="2 12" />
+                  <path d="M300 24 542 164 542 436 300 576 58 436 58 164Z" />
+                  <path d="M300 68C260 150 134 108 110 238C90 334 168 426 300 530C432 426 510 334 490 238C466 108 340 150 300 68Z" />
+                  <path d="M300 96C280 176 178 152 150 232L218 214 190 278 248 262 300 368 352 262 410 278 382 214 450 232C422 152 320 176 300 96Z" />
+                  <path d="M80 300 150 324 120 360 200 386 184 426 260 458 300 514 340 458 416 426 400 386 480 360 450 324 520 300M300 24V96M58 164 110 196M542 164 490 196M58 436 126 404M542 436 474 404" />
+                  <path d="M190 152 164 100 234 134M410 152 436 100 366 134M220 440 242 394 300 426 358 394 380 440" />
+                  <circle cx="300" cy="68" r="6" /><circle cx="80" cy="300" r="6" /><circle cx="520" cy="300" r="6" />
+                </g>
+              </svg>
               <div className="spotlight__orbit spotlight__orbit--one" />
               <div className="spotlight__orbit spotlight__orbit--two" />
               <span className="spotlight__note">
-                Small ideas.
+                Signal / 001
                 <br />
-                <span>Big main-character energy.</span>
+                <span>Independent minds. Shared momentum.</span>
                 <svg viewBox="0 0 80 60" aria-hidden="true">
                   <path d="M5 6q65-8 60 39m-13-9 13 11 12-12" />
                 </svg>
