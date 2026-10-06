@@ -127,4 +127,13 @@ export const projects: Project[] = [
     "A floor-cleaning concept that simplifies everyday home care into one convenient step.",
     "ORCLEEN เป็นแบรนด์ผลิตภัณฑ์ทำความสะอาดพื้นสำหรับใช้ในบ้าน ที่เกิดจากปัญหาในชีวิตประจำวัน เพราะการทำความสะอาดบ้านบางครั้งต้องใช้หลายขั้นตอน หลายอุปกรณ์ และยังเจอปัญหาอย่างมดในบ้าน รวมถึงความกังวลเรื่องกลิ่นหรือสารตกค้าง\n\nเราจึงอยากทำให้การทำความสะอาดง่ายขึ้นและไม่ยุ่งยาก โดย ORCLEEN มีแนวคิดหลักใน 4 ด้าน คือ Clean, Safe, Convenient และ Ant Reduction แต่ทั้งหมดจะสื่อสารผ่าน Core Message เดียว คือ “สะอาดง่าย ในขั้นตอนเดียว”\n\nกลุ่มเป้าหมายหลักคือ ครัวเรือนที่ทำความสะอาดบ้านเป็นประจำ โดยเฉพาะบ้านที่มีเด็กหรือสัตว์เลี้ยง และคนที่ต้องการลดเวลาและขั้นตอนในการทำความสะอาด",
   ),
+  {
+    id: "group-11",
+    name: "Group 11",
+    category: "Coming soon",
+    summary: "A new student venture is taking shape. Details coming soon.",
+    description:
+      "This is a placeholder for Group 11. The team name, project description, and logo will be added when available.",
+    logoSrc: "/images/teams/group-11.svg",
+  },
 ];
