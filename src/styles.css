@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;650;700;750&family=Manrope:wght@400;500;600;650;700;750;800&display=swap");
 :root {
-  --paper: #070911;
-  --ink: #e6edf5;
-  --muted: #a0aec0;
-  --red: #45dede;
-  --line: #273041;
+  --paper: #080808;
+  --ink: #ffffff;
+  --muted: #b3b3b3;
+  --red: #ff5263;
+  --line: #333333;
   --font: "DM Sans", Arial, sans-serif;
   font-family: var(--font);
   color: var(--ink);
@@ -1047,7 +1047,7 @@ h3 {
 }
 .project-card__visual {
   position: relative;
-  background: var(--tint, #e7e5dc);
+  background: var(--tint, #202020);
   height: 195px;
   display: flex;
   align-items: center;

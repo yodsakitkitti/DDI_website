@@ -129,11 +129,20 @@ export const projects: Project[] = [
   ),
   {
     id: "group-11",
-    name: "Group 11",
+    name: "4Real",
     category: "Coming soon",
     summary: "A new student venture is taking shape. Details coming soon.",
     description:
-      "This is a placeholder for Group 11. The team name, project description, and logo will be added when available.",
+      "4Real is taking shape. The project description and logo will be added when available.",
     logoSrc: "/images/teams/group-11.svg",
+  },
+  {
+    id: "thinktank",
+    name: "Thinktank",
+    category: "Coming soon",
+    summary: "A new student venture is taking shape. Details coming soon.",
+    description:
+      "Thinktank is taking shape. The project description and logo will be added when available.",
+    logoSrc: "/images/teams/thinktank.svg",
   },
 ];
