@@ -15,7 +15,7 @@ export function Hero({ content }: { content: SiteContent }) {
         <div
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(90deg, rgba(7, 9, 17, 0.98) 0%, rgba(7, 9, 17, 0.94) 38%, rgba(7, 9, 17, 0.86) 100%), url(${content.heroImageSrc})`,
+            backgroundImage: `linear-gradient(90deg, rgba(8, 8, 8, 0.98) 0%, rgba(8, 8, 8, 0.94) 38%, rgba(8, 8, 8, 0.86) 100%), url(${content.heroImageSrc})`,
           }}
         >
           <section className="hero wrap" aria-labelledby="hero-heading">
@@ -69,7 +69,7 @@ export function Hero({ content }: { content: SiteContent }) {
               <svg className="cyber-sigil" viewBox="0 0 600 600" fill="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="sigil-color" x1="0" y1="0" x2="600" y2="600" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#45dede" /><stop offset="0.55" stopColor="#9f51e8" /><stop offset="1" stopColor="#e94fc9" />
+                    <stop stopColor="#ff5263" /><stop offset="0.55" stopColor="#b8142c" /><stop offset="1" stopColor="#ffffff" />
                   </linearGradient>
                 </defs>
                 <g stroke="url(#sigil-color)" strokeWidth="2">
